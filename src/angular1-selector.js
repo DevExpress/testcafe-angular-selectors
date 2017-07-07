@@ -74,43 +74,61 @@ class Angular1Selector {
         };
     }
 
-    _assertNonEmptyStringParameter (paramName, paramValue) {
+    _assertNonEmptyStringParameter ({ paramShortDescription, paramValue }) {
         if (typeof paramValue !== 'string' || !paramValue)
-            throw new Error(`"${paramName}" parameter should be a non-empty string`);
+            throw new Error(`"${paramShortDescription}" parameter should be a non-empty string`);
     }
 
     byBinding (expression, parentSelector) {
-        this._assertNonEmptyStringParameter('Binding expression', expression);
+        this._assertNonEmptyStringParameter({
+            paramShortDescription: 'Binding expression',
+            paramValue:            expression
+        });
 
         return this._findByBinding(expression, parentSelector);
     }
 
     byExactBinding (expression, parentSelector) {
-        this._assertNonEmptyStringParameter('Binding expression', expression);
+        this._assertNonEmptyStringParameter({
+            paramShortDescription: 'Binding expression',
+            paramValue:            expression
+        });
 
         return this._findByBinding(expression, parentSelector, true);
     }
 
     byModel (expression, parentSelector) {
-        this._assertNonEmptyStringParameter('Model expression', expression);
+        this._assertNonEmptyStringParameter({
+            paramShortDescription: 'Model expression',
+            paramValue:            expression
+        });
 
         return this._findByAngularAttr('model', expression, parentSelector, true);
     }
 
     byOptions (expression, parentSelector) {
-        this._assertNonEmptyStringParameter('Options expression', expression);
+        this._assertNonEmptyStringParameter({
+            paramShortDescription: 'Options expression',
+            paramValue:            expression
+        });
 
         return this._findByAngularAttr('options', expression, parentSelector, true);
     }
 
     byRepeater (expression, parentSelector) {
-        this._assertNonEmptyStringParameter('Repeat expression', expression);
+        this._assertNonEmptyStringParameter({
+            paramShortDescription: 'Repeat expression',
+            paramValue:            expression
+        });
 
         return this._findByAngularAttr('repeat', expression, parentSelector);
     }
 
     byExactRepeater (expression, parentSelector) {
-        this._assertNonEmptyStringParameter('Repeat expression', expression);
+        this._assertNonEmptyStringParameter({
+            paramShortDescription: 'Repeat expression',
+            paramValue:            expression
+        });
 
         return this._findByAngularAttr('repeat', expression, parentSelector, true);
     }
