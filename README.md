@@ -18,7 +18,8 @@ fixture `TestFixture`
     .page('http://todomvc.com/examples/angularjs/');
 
 test('add new item', async t => {
-    await t.typeText(Angular1Selector1.byModel('newTodo'), 'new item')
+    await t
+        .typeText(Angular1Selector1.byModel('newTodo'), 'new item')
         .pressKey('enter')
         .expect(Selector('#todo-list').visible).ok();
 });
