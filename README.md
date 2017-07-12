@@ -8,6 +8,22 @@ This plugin provides selector extensions that make it easier to test Angular app
 npm install testcafe-angular-selectors
 ```
 
+## Usage
+
+```js
+import { Angular1Selector1 } from 'testcafe-angular-selectors';
+import { Selector } from 'testcafe';
+
+fixture `TestFixture`
+    .page('http://todomvc.com/examples/angularjs/');
+
+test('add new item', async t => {
+    await t.typeText(Angular1Selector1.byModel('newTodo'), 'new item')
+        .pressKey('enter')
+        .expect(Selector('#todo-list').visible).ok();
+});
+```
+
 ## Angular1 Selector extensions
 
 ### byBinding

@@ -4,7 +4,7 @@ import { Selector, ClientFunction } from 'testcafe';
 
 class Angular1Selector {
     constructor () {
-        const getComparer            = ClientFunction(exactMatch => {
+        const getComparer = ClientFunction(exactMatch => {
             const strictComparer   = function (item1, item2) {
                 return item1 === item2;
             };
@@ -14,6 +14,7 @@ class Angular1Selector {
 
             return exactMatch ? strictComparer : containsComparer;
         });
+
         const testNodeForAngularAttr = ClientFunction((node, attrSuffix) => {
             const ANGULAR_ATTR_PREFIXES = ['ng-', 'ng_', 'data-ng-', 'x-ng-', 'ng\\:'];
             const result                = {
@@ -33,9 +34,10 @@ class Angular1Selector {
 
             return result;
         });
-        const ensureParent           = parentSelector => parentSelector || Selector(() => document.documentElement);
 
-        this._findByBinding     = (expression, parentSelector, exactMatch) => {
+        const ensureParent = parentSelector => parentSelector || Selector(() => document.documentElement);
+
+        this._findByBinding = (expression, parentSelector, exactMatch) => {
             const parent       = ensureParent(parentSelector);
             const dependencies = { getComparer, exactMatch, expression };
             const filter       = ClientFunction(node => {
@@ -55,6 +57,7 @@ class Angular1Selector {
                 .find('.ng-binding')
                 .filter(filter, dependencies);
         };
+
         this._findByAngularAttr = (name, value, parentSelector, exactMatch) => {
             const parent       = ensureParent(parentSelector);
             const dependencies = { getComparer, testNodeForAngularAttr, exactMatch, name, value };
