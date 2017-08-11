@@ -39,7 +39,7 @@ Parameter                   | Description
 expression                        |  The JavaScript expression to which the element's `textContent` is bound.
 parentSelector&#160;*(optional)*  | A TestCafe [selector](https://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/selectors.html). If specified, TestCafe will search for the target element among the descendants of the element identified by this selector.
 
-NOTE: we don't support a deprecated syntax `Angular1Selector.byBinding('{{person.name}}')`
+> We don't support deprecated syntax `Angular1Selector.byBinding('{{person.name}}')`
 
 ### byExactBinding
 Find elements by exact binding.
