@@ -11,7 +11,7 @@ npm install testcafe-angular-selectors
 ## Usage
 
 ```js
-import { Angular1Selector1 } from 'testcafe-angular-selectors';
+import { Angular1Selector } from 'testcafe-angular-selectors';
 import { Selector } from 'testcafe';
 
 fixture `TestFixture`
@@ -19,7 +19,7 @@ fixture `TestFixture`
 
 test('add new item', async t => {
     await t
-        .typeText(Angular1Selector1.byModel('newTodo'), 'new item')
+        .typeText(Angular1Selector.byModel('newTodo'), 'new item')
         .pressKey('enter')
         .expect(Selector('#todo-list').visible).ok();
 });
@@ -32,11 +32,11 @@ See more examples [here](/test/angular1-test.js).
 ### byBinding
 Find elements by text binding. Does a partial match, so any elements bound to variables containing the input string will be returned.
 ```js
-Angular1Selector.byBinding(expression, parentSelector)
+Angular1Selector.byBinding(bindingDescriptor, parentSelector)
 ```
 Parameter                   | Description
 --------------------------- | -----------
-expression                        |  The JavaScript expression to which the element's `textContent` is bound.
+bindingDescriptor                 |  The JavaScript expression to which the element's `textContent` is bound.
 parentSelector&#160;*(optional)*  | A TestCafe [selector](https://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/selectors.html). If specified, TestCafe will search for the target element among the descendants of the element identified by this selector.
 
 > We don't support deprecated syntax `Angular1Selector.byBinding('{{person.name}}')`
@@ -44,52 +44,52 @@ parentSelector&#160;*(optional)*  | A TestCafe [selector](https://devexpress.git
 ### byExactBinding
 Find elements by exact binding.
 ```js
-Angular1Selector.byExactBinding(expression, parentSelector)
+Angular1Selector.byExactBinding(bindingDescriptor, parentSelector)
 ```
 Parameter                   | Description
 --------------------------- | -----------
-expression                        |  The JavaScript expression to which the element's `textContent` is bound.
+bindingDescriptor                 |  The JavaScript expression to which the element's `textContent` is bound.
 parentSelector&#160;*(optional)*  | A TestCafe [selector](https://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/selectors.html). If specified, TestCafe will search for the target element among the descendants of the element identified by this selector.
 
 ### byModel
 Find elements by 'ng-model' expression
 ```js
-Angular1Selector.byModel(expression, parentSelector)
+Angular1Selector.byModel(model, parentSelector)
 ```
 Parameter                   | Description
 --------------------------- | -----------
-expression                        | The JavaScript expression used to bind a property on the scope to an input, select, textarea (or a custom form control).
+model                             | The JavaScript expression used to bind a property on the scope to an input, select, textarea (or a custom form control).
 parentSelector&#160;*(optional)*  | A TestCafe [selector](https://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/selectors.html). If specified, TestCafe will search for the target element among the descendants of the element identified by this selector.
 
 ### byOptions
                  
 Find elements by 'ng-options' expression.
 ```js
-Angular1Selector.byOptions(expression, parentSelector)
+Angular1Selector.byOptions(optionsDescriptor, parentSelector)
 ```
 Parameter                   | Description
 --------------------------- | -----------
-expression                        | The JavaScript expression used to generate a list of <option> elements for the <select> element.
+optionsDescriptor                 | The JavaScript expression used to generate a list of <option> elements for the <select> element.
 parentSelector&#160;*(optional)*  | A TestCafe [selector](https://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/selectors.html). If specified, TestCafe will search for the target element among the descendants of the element identified by this selector.
 
 ### byRepeater
 Find elements by repeater. Does a partial match, so any elements bound to variables containing the input string will be returned.
 ```js
-Angular1Selector.byRepeater(expression, parentSelector)
+Angular1Selector.byRepeater(repeatDescriptor, parentSelector)
 ```
 Parameter                   | Description
 --------------------------- | -----------
-expression                        | The JavaScript expression used to instantiate a template.
+repeatDescriptor                  | The JavaScript expression used to instantiate a template.
 parentSelector&#160;*(optional)*  | A TestCafe [selector](https://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/selectors.html). If specified, TestCafe will search for the target element among the descendants of the element identified by this selector.
 
 ### byExactRepeat
 Find elements by exact repeater.
 ```js
-Angular1Selector.byExactRepeat(expression, parentSelector)
+Angular1Selector.byExactRepeater(repeatDescriptor, parentSelector)
 ```
 Parameter                   | Description
 --------------------------- | -----------
-expression                        | The JavaScript expression used to instantiate a template.
+repeatDescriptor                  | The JavaScript expression used to instantiate a template.
 parentSelector&#160;*(optional)*  | A TestCafe [selector](https://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/selectors.html). If specified, TestCafe will search for the target element among the descendants of the element identified by this selector.
              
 
