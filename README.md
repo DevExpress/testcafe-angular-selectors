@@ -1,6 +1,6 @@
 # testcafe-angular-selectors
 
-This plugin provides selector extensions that make it easier to test Angular applications with [TestCafe](https://github.com/DevExpress/testcafe/). These extensions allow you to create a Selector to find elements on the page by **expressions** that are native to Angular applications (like `binding`, `model` etc.. ).
+This plugin provides selector extensions that make it easier to test Angular applications with [TestCafe](https://github.com/DevExpress/testcafe/). These extensions allow you to create a Selector to find elements on the page in a way that is native to Angular applications (like `binding`, `model` etc.. ).
 
 ## Install
 
