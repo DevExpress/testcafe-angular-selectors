@@ -1,6 +1,14 @@
 {
   "name": "testcafe-angular-selectors",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "description": "Angular selectors for TestCafe",
+  "author": {
+    "name": "Developer Express Inc.",
+    "url": "https://devexpress.com"
+  },
+  "main": "lib/index",
+  "files": [ "lib" ],
+  "license": "MIT",
   "scripts": {
     "lint": "eslint src/*.js test/*.js",
     "http-server": "http-server ./ -s",
@@ -21,6 +29,13 @@
     "publish-please": "^2.2.0",
     "testcafe": "^0.15.0"
   },
+  "keywords": [
+    "testcafe",
+    "angular",
+    "angularjs",
+    "selectors",
+    "plugin"
+  ],
   "peerDependencies": {
     "testcafe": "*"
   }
