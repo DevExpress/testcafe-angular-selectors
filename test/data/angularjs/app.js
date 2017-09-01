@@ -1,6 +1,6 @@
-var ng1App = angular.module('ng1', []);
+var ngApp = angular.module('ng1', []);
 
-ng1App.controller('MainController', function MainController ($scope) {
+ngApp.controller('MainController', function MainController ($scope) {
     $scope.person = {
         name:               'John Smith',
         email:              'johnsmith@company.com',

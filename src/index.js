@@ -1,3 +1,3 @@
-import Angular1Selector from './angular1-selector';
+import AngularJSSelector from './angularjs-selector';
 
-export { Angular1Selector };
+export { AngularJSSelector };
