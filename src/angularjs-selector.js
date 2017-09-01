@@ -2,7 +2,7 @@
 
 import { Selector, ClientFunction } from 'testcafe';
 
-class Angular1Selector {
+class AngularJSSelector {
     constructor () {
         const getComparer = ClientFunction(exactMatch => {
             const strictComparer   = function (item1, item2) {
@@ -137,4 +137,4 @@ class Angular1Selector {
     }
 }
 
-export default new Angular1Selector();
+export default new AngularJSSelector();
