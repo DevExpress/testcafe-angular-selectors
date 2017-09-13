@@ -50,3 +50,5 @@ node_modules/*
 .idea/*
 lib/*
 test/data/lib/*
+test/data/angular/*.component.js
+test/data/angular/*.component.js.map
