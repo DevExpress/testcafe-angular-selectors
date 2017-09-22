@@ -1,15 +1,15 @@
 # Angular Selector Extentions
 
-## Preparation
-Ensure that your application bootstrapped in development mode.
-By default, this is true, unless code contains [enableProdMode](https://angular.io/api/core/enableProdMode) method call.
+## Prerequisites
+Ensure that your application is bootstrapped in the development mode.
+By default, this is true, unless the code contains the [enableProdMode](https://angular.io/api/core/enableProdMode) method call.
 
-If your application run in production mode then `AngularSelector` will not work.
+If your application runs in the production mode, you won't be able to use `AngularSelector`.
 
 ## Usage
 
 ### WaitForAngular
-To wait until Angular'component tree was loaded need to add `waitForAngular` method into fixture's `beforeEach` hook.
+To wait until the Angular's component tree is loaded, add the `waitForAngular` method into fixture's `beforeEach` hook.
 
 ```js
 import { waitForAngular } from 'testcafe-angular-selectors';
@@ -20,15 +20,17 @@ fixture `App tests`
         await t.expect(waitForAngular()).ok();
     });
 ```
-Sometime Angular's component tree is very large or your application has a large startup time.
-In this case the assertion `await t.expect(waitForAngular()).ok();` may failed.
-To prevent this you can increase timeout for assertion.
+
+Sometimes the Angular's component tree is very large or your application takes a lot of time to start up.
+In this case, the assertion `await t.expect(waitForAngular()).ok();` may fail.
+To prevent this, you can increase timeout for the assertion.
+
 ```js
 await t.expect(waitForAngular()).ok({ timeout: 10000 });
 ```
 
 ### AngularSelector
-`AngularSelector` allows to select html element by Angular's component selector or nested component selectors.
+`AngularSelector` allows you to select an HTML element by Angular's component selector or nested component selectors.
 
 Suppose you have the following markup
 ```html
@@ -47,7 +49,7 @@ const rootAngular = AngularSelector();
 ```
 The rootAngular variable will contain the `<my-app>` element.
 
-> If your application has multiple root then `AngularSelector` returns first one that will be returned by `window.getAllAngularRootElements` function
+> If your application has multiple roots, `AngularSelector` will return the first root returned by the `window.getAllAngularRootElements` function
  
 
 To get a root DOM element for a component, pass the component selector to the `AngularSelector` constructor.
@@ -73,4 +75,4 @@ const myAppTitle = AngularSelector().find('h1');
 
 ```
 
-see more examples [here](test/angular-selector-test.js);
+See more examples [here](test/angular-selector-test.js);

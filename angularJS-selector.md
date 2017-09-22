@@ -1,5 +1,5 @@
 # AngularJS selector extentions
-`AngularJSSelector` contains a set of static methods to search by specified binding (`byModel`, `byBinding` and etc.).
+`AngularJSSelector` contains a set of static methods to search for an HTML element by the specified binding (`byModel`, `byBinding` and etc.).
 
 ## Usage
 
