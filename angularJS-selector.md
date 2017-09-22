@@ -20,6 +20,7 @@ test('add new item', async t => {
 
 See more examples [here](test/angularjs-selector-test.js).
 
+## API
 ### byBinding
 Find elements by text binding. Does a partial match, so any elements bound to variables containing the input string will be returned.
 ```js
