@@ -3,7 +3,7 @@ import { AngularSelector, waitForAngular } from '../lib';
 fixture `AngularSelector`
     .page('http://localhost:8080/test/data/angular')
     .beforeEach(async t => {
-        await t.expect(waitForAngular()).ok({ timeout: 10000 });
+        await t.expect(waitForAngular()).ok({ timeout: 20000 });
     });
 
 test('root', async t => {
