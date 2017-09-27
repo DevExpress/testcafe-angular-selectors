@@ -36,8 +36,8 @@ import { AngularSelector, waitForAngular } from 'testcafe-angular-selectors';
 
 fixture `App tests`
     .page('http://angular-app-url')
-    .beforeEach(async t => {
-        await t.expect(waitForAngular()).ok();
+    .beforeEach(async () => {
+        await waitForAngular();
     });
 
 test('test', async t => {
