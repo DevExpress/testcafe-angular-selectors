@@ -46,7 +46,7 @@ export default Selector(complexSelector => {
 
     validateSelector(complexSelector);
 
-    // NOTE: We support only applications with a single root element
+    // NOTE: If there are multiple roots on the page we find a target in the first root only
     const rootElement = window.getAllAngularRootElements()[0];
 
     if (!complexSelector)

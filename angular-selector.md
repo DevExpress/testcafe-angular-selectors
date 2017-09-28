@@ -8,9 +8,9 @@ If your application runs in the production mode, you won't be able to use `Angul
 
 ## Usage
 
-### Wait for application is ready to run tests
+### Wait for application to be ready to run tests
 
-To wait until the Angular's component tree is loaded, add the `waitForAngular` method into fixture's `beforeEach` hook.
+To wait until the Angular's component tree is loaded, add the `waitForAngular` method to fixture's `beforeEach` hook.
 
 ```js
 import { waitForAngular } from 'testcafe-angular-selectors';
@@ -75,9 +75,9 @@ See more examples [here](test/angular-selector-test.js).
 
 ### Obtaining component's state
 
-As an alternative to [TestCafe snapshot properties](http://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/dom-node-state.html), you can obtain state of a Angular component.
+As an alternative to [TestCafe snapshot properties](http://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/dom-node-state.html), you can obtain the state of an Angular component.
 
-To obtain component state, use the Angular selector's .getAngular() method.
+To obtain the component state, use the Angular selector's `.getAngular()` method.
 
 The .getAngular() method returns a [client function](https://devexpress.github.io/testcafe/documentation/test-api/obtaining-data-from-the-client.html). This function resolves to an object that contains component's state.
 
