@@ -79,7 +79,7 @@ As an alternative to [TestCafe snapshot properties](http://devexpress.github.io/
 
 To obtain the component state, use the Angular selector's `.getAngular()` method.
 
-The .getAngular() method returns a [client function](https://devexpress.github.io/testcafe/documentation/test-api/obtaining-data-from-the-client.html). This function resolves to an object that contains component's state.
+The `.getAngular()` method returns a [client function](https://devexpress.github.io/testcafe/documentation/test-api/obtaining-data-from-the-client.html). This function resolves to an object that contains component's state.
 
 The returned client function can be passed to assertions activating the [Smart Assertion Query mechanism](https://devexpress.github.io/testcafe/documentation/test-api/assertions/#smart-assertion-query-mechanism).
 
@@ -92,8 +92,8 @@ const listAngular = await list.getAngular();
 await t.expect(listAngular.testProp).eql(1);
 ```
 
-As an alternative, the .getAngular() method can take a function that returns the required state property. 
-This function acts as a filter. Its argument is an object returned by .getAngular(), i.e. { state: ...}.
+As an alternative, the `.getAngular()` method can take a function that returns the required state property. 
+This function acts as a filter. Its argument is an object returned by `.getAngular()`, i.e. `{ state: ...}`.
 
 ```js
 import { AngularSelector } from 'testcafe-angular-selectors';
