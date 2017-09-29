@@ -2,5 +2,8 @@
   "plugins": [
     "testcafe"
   ],
-  "extends": "plugin:testcafe/recommended"
+  "extends": "plugin:testcafe/recommended",
+  "rules": {
+    "no-unused-expressions": 0
+  }
 }
