@@ -1,4 +1,5 @@
 /*global Promise*/
+
 import { ClientFunction } from 'testcafe';
 
 export default ClientFunction(ms => {
@@ -8,10 +9,11 @@ export default ClientFunction(ms => {
         const WAIT_TIMEOUT  = ms || 10000;
         const PING_INTERVAL = 100;
 
-        const clearTimeouts                   = () => {
+        const clearTimeouts = () => {
             window.clearTimeout(pingTimeoutId);
             window.clearInterval(pingIntervalId);
         };
+
         const isThereAngularInDevelopmentMode = () => {
             if (window.ng && typeof window.ng.probe === 'function' &&
                 typeof window.getAllAngularRootElements === 'function') {
@@ -24,7 +26,8 @@ export default ClientFunction(ms => {
 
             return false;
         };
-        const check                           = () => {
+
+        const check = () => {
             if (isThereAngularInDevelopmentMode()) {
                 clearTimeouts();
                 resolve();

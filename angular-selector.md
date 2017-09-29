@@ -52,7 +52,7 @@ To get a root DOM element for a component, pass the component selector to the `A
 ```js
 import { AngularSelector } from 'testcafe-angular-selectors';
 
-const listConponent = AngularSelector('list');
+const listComponent = AngularSelector('list');
 ```
 
 To obtain a nested component, you can use a combined selector.
@@ -75,7 +75,7 @@ See more examples [here](test/angular-selector-test.js).
 
 ### Obtaining component's state
 
-As an alternative to [TestCafe snapshot properties](http://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/dom-node-state.html), you can obtain the state of an Angular component.
+As an alternative to [DOM Node State properties](http://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/dom-node-state.html), you can obtain the state of an Angular component.
 
 To obtain the component state, use the Angular selector's `.getAngular()` method.
 

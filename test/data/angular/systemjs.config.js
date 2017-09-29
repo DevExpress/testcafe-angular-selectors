@@ -1,9 +1,11 @@
-(function (global) {
+/*global System*/
+
+(function () {
     System.config({
-        paths:    {
+        paths: {
             'npm:': '/node_modules/'
         },
-        map:      {
+        map: {
             app:                                 'app',
             '@angular/core':                     'npm:@angular/core/bundles/core.umd.js',
             '@angular/common':                   'npm:@angular/common/bundles/common.umd.js',
@@ -16,7 +18,7 @@
             'rxjs':                              'npm:rxjs',
         },
         packages: {
-            app:  {
+            app: {
                 main:             './main.js',
                 defaultExtension: 'js'
             },
@@ -25,4 +27,4 @@
             }
         }
     });
-})(this);
+})();

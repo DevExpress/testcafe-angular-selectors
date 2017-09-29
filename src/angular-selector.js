@@ -46,6 +46,15 @@ export default Selector(complexSelector => {
 
     validateSelector(complexSelector);
 
+    const isPageReadyForTesting = window.ng && typeof window.ng.probe === 'function' &&
+                                  typeof window.getAllAngularRootElements === 'function';
+
+    if (!isPageReadyForTesting) {
+        throw new Error(`The page doesn\'t contain Angular components or they are not loaded completely
+                         or your Angular app is not in a development mode.
+                         Use the \'waitForAngular\' function to ensure the components are loaded.`);
+    }
+
     // NOTE: If there are multiple roots on the page we find a target in the first root only
     const rootElement = window.getAllAngularRootElements()[0];
 

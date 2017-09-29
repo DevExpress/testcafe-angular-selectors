@@ -34,14 +34,3 @@ test('composite selector', async t => {
         .expect(listItemAngular5Id).eql('list2-item2');
 });
 
-test('should throw exception for non-valid selectors', async t => {
-    for (const selector of [null, false, {}, 42]) {
-        try {
-            await AngularSelector(selector);
-            await t.expect(false).ok('The selector should throw an error but it doesn\'t.');
-        }
-        catch (e) {
-            await t.expect(e.errMsg).contains(`If the selector parameter is passed it should be a string, but it was ${typeof selector}`);
-        }
-    }
-});
