@@ -65,7 +65,7 @@ const listItemComponent = AngularSelector('list list-item');
 You can combine Angular selectors with TestCafe's Selector filter functions like `.find`, `.withText`, `.nth` and [others](http://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/selectors.html#functional-style-selectors).
 
 ```js
-import { AngularSelector } from 'testcafe-anugular-selectors';
+import { AngularSelector } from 'testcafe-angular-selectors';
 
 const myAppTitle = AngularSelector().find('h1');
 
