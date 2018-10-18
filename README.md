@@ -1,21 +1,22 @@
 # testcafe-angular-selectors
 
-This plugin provides [Selector](https://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/selectors.html) extensions that make it easier to test Angular applications with [TestCafe](https://github.com/DevExpress/testcafe/). 
+This plugin provides [Selector](https://devexpress.github.io/testcafe/documentation/test-api/selecting-page-elements/selectors.html) extensions that make it easier to test Angular applications with [TestCafe](https://github.com/DevExpress/testcafe/).
 These extensions allow you to create a `Selector` to find elements on the page in a way that is native to Angular applications.
 
 ## Install
 
-```
+```sh
 npm install testcafe-angular-selectors
 ```
 
 ## Usage
 
-This module includes separate helpers for AngularJS(1.x) and Angular(2+) applications.
+This module includes separate helpers for Angular and AngularJS applications.
 
 See the following topics for more details:
-* [AngularJS(1.x) Selector extentions](./angularJS-selector.md)
-* [Angular(2+) Selector extentions](./angular-selector.md)
+
+* [Angular Selector extentions](./angular-selector.md)
+* [AngularJS Selector extentions](./angularJS-selector.md)
 
 ## Examples
 
@@ -43,4 +44,4 @@ fixture `App tests`
 test('test', async t => {
     const firstListItem = AngularSelector('list list-item');
 });
-``` 
+```
