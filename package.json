@@ -1,6 +1,6 @@
 {
   "name": "testcafe-angular-selectors",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Angular selectors for TestCafe",
   "author": {
     "name": "Developer Express Inc.",
@@ -66,5 +66,6 @@
   ],
   "peerDependencies": {
     "testcafe": ">=0.18.0"
-  }
+  },
+  "types": "./ts-defs/index.d.ts"
 }
