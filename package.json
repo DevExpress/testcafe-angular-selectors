@@ -1,6 +1,6 @@
 {
   "name": "testcafe-angular-selectors",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Angular selectors for TestCafe",
   "author": {
     "name": "Developer Express Inc.",
@@ -12,7 +12,8 @@
   },
   "main": "lib/index",
   "files": [
-    "lib"
+    "lib",
+    "ts-defs"
   ],
   "license": "MIT",
   "scripts": {
