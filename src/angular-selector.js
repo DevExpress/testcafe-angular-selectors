@@ -6,8 +6,8 @@ export default Selector(complexSelector => {
             throw new Error(`If the selector parameter is passed it should be a string, but it was ${typeof selector}`);
     }
 
-    function getComponentTag (debugElement) {
-        return debugElement.nativeElement.tagName.toLowerCase();
+    function getNativeElementTag (nativeElement) {
+        return nativeElement.tagName.toLowerCase();
     }
 
     function getTagList (componentSelector) {
@@ -17,7 +17,7 @@ export default Selector(complexSelector => {
             .map(el => el.trim().toLowerCase());
     }
 
-    function filterNodes (rootDebugElement, tags) {
+    function filterNodesForDebugElement (rootDebugElement, tags) {
         const foundNodes = [];
 
         function walkDebugElements (debugElement, tagIndex, checkFn) {
@@ -38,7 +38,36 @@ export default Selector(complexSelector => {
             if (!debugElement.componentInstance)
                 return false;
 
-            return tags[tagIndex] === getComponentTag(debugElement);
+            return tags[tagIndex] === getNativeElementTag(debugElement.nativeElement);
+        });
+
+        return foundNodes;
+    }
+
+    function filterNodesForNativeElement (rootElement, tags) {
+        const foundNodes = [];
+    
+        function walkNativeElements (nativeElement, tagIndex, checkFn) {
+            if (checkFn(nativeElement, tagIndex)) {
+                if (tagIndex === tags.length - 1) {
+                    foundNodes.push(nativeElement);
+                    return;
+                }
+
+                tagIndex++;
+            }
+
+            for (const childNativeElement of nativeElement.children)
+                walkNativeElements(childNativeElement, tagIndex, checkFn);
+        }
+
+        walkNativeElements(rootElement, 0, (nativeElement, tagIndex) => {
+            const componentInstance = window.ng.getComponent(nativeElement);
+
+            if (!componentInstance)
+                return false;
+
+            return tags[tagIndex] === getNativeElementTag(nativeElement);
         });
 
         return foundNodes;
@@ -46,8 +75,10 @@ export default Selector(complexSelector => {
 
     validateSelector(complexSelector);
 
-    const isPageReadyForTesting = window.ng && typeof window.ng.probe === 'function' &&
-                                  typeof window.getAllAngularRootElements === 'function';
+    const isGetAllAngularRootElements = typeof window.getAllAngularRootElements === 'function';
+    const isNgProbeReady = !!window.ng && typeof window.ng.probe === 'function';
+    const isNgGetComponentAndGetHostElementReady = !!window.ng && typeof window.ng.getComponent === 'function' && typeof window.ng.getHostElement === 'function';
+    const isPageReadyForTesting = isGetAllAngularRootElements && (isNgProbeReady || isNgGetComponentAndGetHostElementReady);
 
     if (!isPageReadyForTesting) {
         throw new Error(`The page doesn't contain Angular components or they are not loaded completely
@@ -61,18 +92,38 @@ export default Selector(complexSelector => {
     if (!complexSelector)
         return rootElement;
 
-    const tags             = getTagList(complexSelector);
-    const debugElementRoot = window.ng.probe(rootElement);
+    const tags = getTagList(complexSelector);
 
-    return filterNodes(debugElementRoot, tags);
+    if (isNgProbeReady) {
+        const debugElementRoot = window.ng.probe(rootElement);
+
+        return filterNodesForDebugElement(debugElementRoot, tags);
+    }
+
+    return filterNodesForNativeElement(rootElement, tags);
 
 }).addCustomMethods({
     getAngular: (node, fn) => {
-        const debugElement = window.ng.probe(node);
-        const state        = debugElement.componentInstance;
+        let state;
+
+        if (window.ng.probe) {
+            const debugElement = window.ng.probe(node);
+
+            state = debugElement && debugElement.componentInstance;
+        }
+        else if (window.ng.getComponent(node)) 
+            state = window.ng.getComponent(node);
+        
 
         if (typeof fn === 'function')
             return fn({ state });
+
+        // workaround to avoid circular structure to JSON because of __ngContext__
+        if (state && '__ngContext__' in state) {
+            state = JSON.parse(
+                JSON.stringify(state, (key, value) => key !== '__ngContext__' ? value : null),
+            );
+        }
 
         return state;
     }

@@ -52,3 +52,4 @@ lib/*
 test/data/lib/*
 test/data/angular/app/*.js
 test/data/angular/app/*.js.map
+test/data/angular/dist/*

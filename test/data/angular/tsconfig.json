@@ -1,4 +1,5 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
@@ -7,10 +8,15 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [ "es2015", "dom" ],
+    "removeComments": false,
     "noImplicitAny": true,
+    "skipLibCheck": true,
     "suppressImplicitAnyIndexErrors": true,
     "typeRoots": [
-      "../node_modules/@types/"
+      "node_modules/@types"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules/*"
+  ]
 }

@@ -15,16 +15,28 @@ export default ClientFunction(ms => {
         };
 
         const isThereAngularInDevelopmentMode = () => {
-            if (window.ng && typeof window.ng.probe === 'function' &&
-                typeof window.getAllAngularRootElements === 'function') {
-                const rootElements          = window.getAllAngularRootElements();
-                const firstRootDebugElement = rootElements &&
-                                              rootElements.length ? window.ng.probe(rootElements[0]) : null;
+            if (typeof window.getAllAngularRootElements !== 'function') 
+                return false;
+            
 
-                return !!(firstRootDebugElement && firstRootDebugElement.injector);
+            const rootElements = window.getAllAngularRootElements();
+
+            if (!rootElements || !rootElements.length) 
+                return false;
+            
+
+            let firstRootInjector = null;
+
+            if (window.ng && typeof window.ng.probe === 'function') {
+                const firstRootDebugElement = window.ng.probe(rootElements[0]);
+
+                firstRootInjector = firstRootDebugElement && firstRootDebugElement.injector;
             }
+            else if (window.ng && typeof window.ng.getInjector === 'function') 
+                firstRootInjector = window.ng.getInjector(rootElements[0]);
+            
 
-            return false;
+            return !!firstRootInjector;
         };
 
         const check = () => {
