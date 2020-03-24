@@ -47,6 +47,11 @@ Temporary Items
 .apdisk
 
 node_modules/*
+test/data/angularjs/node_modules/*
+test/data/angular/node_modules/*
+package-lock.json
+test/data/angularjs/package-lock.json
+test/data/angular/package-lock.json
 .idea/*
 lib/*
 test/data/lib/*

@@ -33,4 +33,3 @@ test('composite selector', async t => {
         .expect(listItemAngular6.id).eql('list2-item3')
         .expect(listItemAngular5Id).eql('list2-item2');
 });
-
