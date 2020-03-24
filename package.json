@@ -24,7 +24,7 @@
     "lint": "eslint src/*.js test/*.js",
     "http-server": "http-server ./ -s",
     "compile-angular-site": "cd test/data/angular && tsc -p ./",
-    "compile-angular-9-site": "cd test/data/angular-9 && ng build angular-site",
+    "compile-angular-9-site": "cd test/data/angular-9 && npx ng build angular-site",
     "testcafe": "testcafe all test/*-test.js --app \"npm run http-server\"",
     "test": "npm run lint && npm run build && npm run compile-angular-site && npm run compile-angular-9-site && npm run testcafe",
     "build": "babel src --out-dir lib",
