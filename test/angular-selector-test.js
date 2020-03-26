@@ -1,6 +1,6 @@
 import { AngularSelector, waitForAngular } from '../lib';
 
-runTests('AngularSelector (Angular v4)', 'http://localhost:8080/test/data/angular');
+runTests('AngularSelector (Angular v4)', 'http://localhost:8080/test/data/angular-4');
 runTests('AngularSelector (Angular v9)', 'http://localhost:8080/test/data/angular-9/dist/index-aot.html');
 
 function runTests (fixtureLabel, pageUrl) {

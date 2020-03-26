@@ -1,49 +1,50 @@
 var templateUrlRegex = /templateUrl\s*:(\s*['"`](.*?)['"`]\s*)/gm;
-var stylesRegex = /styleUrls *:(\s*\[[^\]]*?\])/g;
-var stringRegex = /(['`"])((?:[^\\]\\\1|.)*?)\1/g;
+var stylesRegex      = /styleUrls *:(\s*\[[^\]]*?\])/g;
+var stringRegex      = /(['`"])((?:[^\\]\\\1|.)*?)\1/g;
 
-module.exports.translate = function(load){
-  if (load.source.indexOf('moduleId') != -1) return load;
+module.exports.translate = function (load) {
+    if (load.source.indexOf('moduleId') !== -1)
+        return load;
 
-  var url = document.createElement('a');
-  url.href = load.address;
+    var url = document.createElement('a');
 
-  var basePathParts = url.pathname.split('/');
+    url.href = load.address;
 
-  basePathParts.pop();
-  var basePath = basePathParts.join('/');
+    var basePathParts = url.pathname.split('/');
 
-  var baseHref = document.createElement('a');
-  baseHref.href = this.baseURL;
-  baseHref = baseHref.pathname;
+    basePathParts.pop();
+    var basePath = basePathParts.join('/');
 
-  if (!baseHref.startsWith('/base/')) { // it is not karma
-    basePath = basePath.replace(baseHref, '');
-  }
+    var baseHref = document.createElement('a');
 
-  load.source = load.source
-    .replace(templateUrlRegex, function(match, quote, url){
-      var resolvedUrl = url;
+    baseHref.href = this.baseURL;
+    baseHref      = baseHref.pathname;
 
-      if (url.startsWith('.')) {
-        resolvedUrl = basePath + url.substr(1);
-      }
+    if (!baseHref.startsWith('/base/')) {
+        basePath = basePath.replace(baseHref, '');
+    }
 
-      return 'templateUrl: "' + resolvedUrl + '"';
-    })
-    .replace(stylesRegex, function(match, relativeUrls) {
-      var urls = [];
+    load.source = load.source
+        .replace(templateUrlRegex, function (match, quote, url) {
+            var resolvedUrl = url;
 
-      while ((match = stringRegex.exec(relativeUrls)) !== null) {
-        if (match[2].startsWith('.')) {
-          urls.push('"' + basePath + match[2].substr(1) + '"');
-        } else {
-          urls.push('"' + match[2] + '"');
-        }
-      }
+            if (url.startsWith('.'))
+                resolvedUrl = basePath + url.substr(1);
 
-      return "styleUrls: [" + urls.join(', ') + "]";
-    });
+            return 'templateUrl: "' + resolvedUrl + '"';
+        })
+        .replace(stylesRegex, function (match, relativeUrls) {
+            var urls = [];
 
-  return load;
+            while ((match = stringRegex.exec(relativeUrls)) !== null) {
+                if (match[2].startsWith('.'))
+                    urls.push('"' + basePath + match[2].substr(1) + '"');
+                else
+                    urls.push('"' + match[2] + '"');
+            }
+
+            return 'styleUrls: [' + urls.join(', ') + ']';
+        });
+
+    return load;
 };

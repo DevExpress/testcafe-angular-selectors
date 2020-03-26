@@ -48,7 +48,8 @@ export default ClientFunction(ms => {
 
         pingTimeoutId = window.setTimeout(() => {
             clearTimeouts();
-            reject(new Error('Cannot find Angular in development mode.'));
+            reject(new Error(`Cannot find Angular in development mode. Make sure your application is in development mode.
+                              For more information please visit https://angular.io/guide/deployment`));
         }, WAIT_TIMEOUT);
 
         check();
