@@ -1,6 +1,7 @@
 import { AngularSelector, waitForAngular } from '../lib';
 
 runTests('AngularSelector (Angular v4)', 'http://localhost:8080/test/data/angular-4');
+runTests('AngularSelector (Angular v8)', 'http://localhost:8080/test/data/angular-8/dist/index-aot.html');
 runTests('AngularSelector (Angular v9)', 'http://localhost:8080/test/data/angular-9/dist/index-aot.html');
 
 function runTests (fixtureLabel, pageUrl) {
@@ -17,6 +18,14 @@ function runTests (fixtureLabel, pageUrl) {
         await t
             .expect(root.exists).ok()
             .expect(rootAngular.rootProp1).eql(1);
+
+        if (rootAngular.hasOwnProperty('__ngContext__')) {
+            const rootAngularByFilterFn = await AngularSelector().getAngular(({ state }) => state);
+
+            await t
+                .expect(rootAngular.__ngContext__).eql(null)
+                .expect(rootAngularByFilterFn.__ngContext__).eql(null);
+        }
     });
 
     test('selector', async t => {

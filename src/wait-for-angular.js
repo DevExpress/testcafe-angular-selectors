@@ -14,29 +14,41 @@ export default ClientFunction(ms => {
             window.clearInterval(pingIntervalId);
         };
 
-        const isThereAngularInDevelopmentMode = () => {
-            if (typeof window.getAllAngularRootElements !== 'function')
-                return false;
+        const getFirstRootElement = () => {
+            if (typeof window.getAllAngularRootElements === 'function') {
+                const rootElements = window.getAllAngularRootElements();
 
-
-            const rootElements = window.getAllAngularRootElements();
-
-            if (!rootElements || !rootElements.length)
-                return false;
-
-
-            let firstRootInjector = null;
-
-            if (window.ng && typeof window.ng.probe === 'function') {
-                const firstRootDebugElement = window.ng.probe(rootElements[0]);
-
-                firstRootInjector = firstRootDebugElement && firstRootDebugElement.injector;
+                return rootElements && rootElements.length ? rootElements[0] : null;
             }
-            else if (window.ng && typeof window.ng.getInjector === 'function')
-                firstRootInjector = window.ng.getInjector(rootElements[0]);
 
+            return null;
+        };
 
-            return !!firstRootInjector;
+        const isElementInjectorExists = (firstRootElement) => {
+            if (window.ng) {
+                // NOTE: Angular version 9 or higher
+                if (typeof window.ng.getInjector === 'function') {
+                    const firstRootInjector       = window.ng.getInjector(firstRootElement);
+                    const injectorConstructorName = firstRootInjector && firstRootInjector.constructor &&
+                        firstRootInjector.constructor.name;
+
+                    return !!injectorConstructorName && injectorConstructorName.toLowerCase() === 'nodeinjector';
+                }
+                // NOTE: Angular version 8 or lower
+                else if (typeof window.ng.probe === 'function') {
+                    const firstRootDebugElement = window.ng.probe(firstRootElement);
+
+                    return !!(firstRootDebugElement && firstRootDebugElement.injector);
+                }
+            }
+
+            return false;
+        };
+
+        const isThereAngularInDevelopmentMode = () => {
+            const firstRootElement = getFirstRootElement();
+
+            return !!firstRootElement && isElementInjectorExists(firstRootElement);
         };
 
         const check = () => {

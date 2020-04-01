@@ -1,5 +1,5 @@
 {
-  "name": "angular",
+  "name": "angular-4",
   "version": "1.0.0",
   "dependencies": {
     "@angular/animations": "^4.0.3",
@@ -8,10 +8,8 @@
     "@angular/compiler-cli": "~4.0.0",
     "@angular/core": "~4.0.0",
     "@angular/forms": "~4.0.0",
-    "@angular/http": "~4.0.0",
     "@angular/platform-browser": "~4.0.0",
     "@angular/platform-browser-dynamic": "~4.0.0",
-    "@angular/platform-server": "~4.0.0",
     "@angular/router": "~4.0.0",
     "@angular/tsc-wrapped": "~4.0.0",
     "@angular/upgrade": "~4.0.0",
