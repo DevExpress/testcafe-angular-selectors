@@ -19,13 +19,7 @@ function runTests (fixtureLabel, pageUrl) {
             .expect(root.exists).ok()
             .expect(rootAngular.rootProp1).eql(1);
 
-        if (rootAngular.hasOwnProperty('__ngContext__')) {
-            const rootAngularByFilterFn = await AngularSelector().getAngular(({ state }) => state);
-
-            await t
-                .expect(rootAngular.__ngContext__).eql(null)
-                .expect(rootAngularByFilterFn.__ngContext__).eql(null);
-        }
+        await t.expect(rootAngular.hasOwnProperty('__ngContext__')).notOk();
     });
 
     test('selector', async t => {

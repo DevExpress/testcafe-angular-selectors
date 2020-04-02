@@ -20,6 +20,6 @@ test('should throw an exception if window.ng does not not exist', async t => {
         await t.expect(false).ok('The selector should throw an error but it doesn\'t.');
     }
     catch (e) {
-        await t.expect(e.errMsg).contains('Use the \'waitForAngular\' function to ensure the components are loaded.');
+        await t.expect(e.errMsg).contains('The tested page was built without Angular framework or it didn\'t load completely.');
     }
 });

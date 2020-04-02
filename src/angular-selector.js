@@ -13,15 +13,12 @@ export default Selector(complexSelector => {
     // NOTE: Angular version 8 or lower
     const walkingDebugElementsMode = window.ng && typeof window.ng.probe === 'function';
 
-    const isOnlyOneWalkingMode = (walkingNativeElementsMode || walkingDebugElementsMode) &&
-        !(walkingNativeElementsMode && walkingDebugElementsMode);
-
-    const isPageReadyForTesting = isOnlyOneWalkingMode && typeof window.getAllAngularRootElements === 'function';
+    const isPageReadyForTesting = (walkingNativeElementsMode || walkingDebugElementsMode) &&
+        typeof window.getAllAngularRootElements === 'function';
 
     if (!isPageReadyForTesting) {
-        throw new Error(`The page doesn't contain Angular components or they are not loaded completely
-                         or your Angular app is not in a development mode.
-                         Use the 'waitForAngular' function to ensure the components are loaded.`);
+        throw new Error(`The tested page was built without Angular framework or it didn't load completely.
+                         Use the 'waitForAngular' function to ensure the page is ready for testing.`);
     }
 
     function getNativeElementTag (nativeElement) {
@@ -101,9 +98,9 @@ export default Selector(complexSelector => {
         if (typeof window.ng.getComponent === 'function') {
             state = window.ng.getComponent(node);
 
-            // NOTE: We cannot handle this circular reference in replicator
-            if (state.__ngContext__)
-                state.__ngContext__ = null;
+            // NOTE: We cannot handle this circular reference in a replicator. So we remove it from the returned component state.
+            if (state && '__ngContext__' in state)
+                state = JSON.parse(JSON.stringify(state, (key, value) => key !== '__ngContext__' ? value : void 0));
         }
         // NOTE: Angular version 8 or lower
         else {
