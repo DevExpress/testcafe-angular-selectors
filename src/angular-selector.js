@@ -17,7 +17,7 @@ export default Selector(complexSelector => {
         typeof window.getAllAngularRootElements === 'function';
 
     if (!isPageReadyForTesting) {
-        throw new Error(`The tested page was built without Angular framework or it didn't load completely.
+        throw new Error(`The tested page does not use Angular or did not load correctly.
                          Use the 'waitForAngular' function to ensure the page is ready for testing.`);
     }
 

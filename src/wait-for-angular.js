@@ -60,8 +60,8 @@ export default ClientFunction(ms => {
 
         pingTimeoutId = window.setTimeout(() => {
             clearTimeouts();
-            reject(new Error(`Cannot find information about Angular components. Make sure that the tested application was deployed in 'development' mode.
-                              For more information please visit https://angular.io/guide/deployment`));
+            reject(new Error(`Cannot find information about Angular components. The tested application should be deployed in development mode.
+                              For more information, see https://angular.io/guide/deployment.`));
         }, WAIT_TIMEOUT);
 
         check();
