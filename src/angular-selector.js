@@ -6,8 +6,23 @@ export default Selector(complexSelector => {
             throw new Error(`If the selector parameter is passed it should be a string, but it was ${typeof selector}`);
     }
 
-    function getComponentTag (debugElement) {
-        return debugElement.nativeElement.tagName.toLowerCase();
+    validateSelector(complexSelector);
+
+    // NOTE: Angular version 9 or higher
+    const walkingNativeElementsMode = window.ng && typeof window.ng.getComponent === 'function';
+    // NOTE: Angular version 8 or lower
+    const walkingDebugElementsMode = window.ng && typeof window.ng.probe === 'function';
+
+    const isPageReadyForTesting = (walkingNativeElementsMode || walkingDebugElementsMode) &&
+        typeof window.getAllAngularRootElements === 'function';
+
+    if (!isPageReadyForTesting) {
+        throw new Error(`The tested page does not use Angular or did not load correctly.
+                         Use the 'waitForAngular' function to ensure the page is ready for testing.`);
+    }
+
+    function getNativeElementTag (nativeElement) {
+        return nativeElement.tagName.toLowerCase();
     }
 
     function getTagList (componentSelector) {
@@ -17,42 +32,52 @@ export default Selector(complexSelector => {
             .map(el => el.trim().toLowerCase());
     }
 
-    function filterNodes (rootDebugElement, tags) {
-        const foundNodes = [];
-
-        function walkDebugElements (debugElement, tagIndex, checkFn) {
-            if (checkFn(debugElement, tagIndex)) {
+    function filterNodes (rootElement, tags) {
+        function walkElements (element, tagIndex, checkFn) {
+            if (checkFn(element, tagIndex)) {
                 if (tagIndex === tags.length - 1) {
-                    foundNodes.push(debugElement.nativeElement);
+                    if (walkingNativeElementsMode)
+                        foundNodes.push(element);
+                    else
+                        foundNodes.push(element.nativeElement);
+
                     return;
                 }
 
                 tagIndex++;
             }
 
-            for (const childDebugElement of debugElement.children)
-                walkDebugElements(childDebugElement, tagIndex, checkFn);
+            for (const childElement of element.children)
+                walkElements(childElement, tagIndex, checkFn);
         }
 
-        walkDebugElements(rootDebugElement, 0, (debugElement, tagIndex) => {
+        function checkDebugElement (debugElement, tagIndex) {
             if (!debugElement.componentInstance)
                 return false;
 
-            return tags[tagIndex] === getComponentTag(debugElement);
-        });
+            return tags[tagIndex] === getNativeElementTag(debugElement.nativeElement);
+        }
+
+        function checkNativeElement (nativeElement, tagIndex) {
+            const componentInstance = window.ng.getComponent(nativeElement);
+
+            if (!componentInstance)
+                return false;
+
+            return tags[tagIndex] === getNativeElementTag(nativeElement);
+        }
+
+        const foundNodes = [];
+
+        if (walkingNativeElementsMode)
+            walkElements(rootElement, 0, checkNativeElement);
+        else {
+            const debugElementRoot = window.ng.probe(rootElement);
+
+            walkElements(debugElementRoot, 0, checkDebugElement);
+        }
 
         return foundNodes;
-    }
-
-    validateSelector(complexSelector);
-
-    const isPageReadyForTesting = window.ng && typeof window.ng.probe === 'function' &&
-                                  typeof window.getAllAngularRootElements === 'function';
-
-    if (!isPageReadyForTesting) {
-        throw new Error(`The page doesn't contain Angular components or they are not loaded completely
-                         or your Angular app is not in a development mode.
-                         Use the 'waitForAngular' function to ensure the components are loaded.`);
     }
 
     // NOTE: If there are multiple roots on the page we find a target in the first root only
@@ -61,15 +86,28 @@ export default Selector(complexSelector => {
     if (!complexSelector)
         return rootElement;
 
-    const tags             = getTagList(complexSelector);
-    const debugElementRoot = window.ng.probe(rootElement);
+    const tags = getTagList(complexSelector);
 
-    return filterNodes(debugElementRoot, tags);
+    return filterNodes(rootElement, tags);
 
 }).addCustomMethods({
     getAngular: (node, fn) => {
-        const debugElement = window.ng.probe(node);
-        const state        = debugElement.componentInstance;
+        let state;
+
+        // NOTE: Angular version 9 or higher
+        if (typeof window.ng.getComponent === 'function') {
+            state = window.ng.getComponent(node);
+
+            // NOTE: We cannot handle this circular reference in a replicator. So we remove it from the returned component state.
+            if (state && '__ngContext__' in state)
+                state = JSON.parse(JSON.stringify(state, (key, value) => key !== '__ngContext__' ? value : void 0));
+        }
+        // NOTE: Angular version 8 or lower
+        else {
+            const debugElement = window.ng.probe(node);
+
+            state = debugElement && debugElement.componentInstance;
+        }
 
         if (typeof fn === 'function')
             return fn({ state });

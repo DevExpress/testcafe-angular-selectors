@@ -38,6 +38,6 @@ test('error message', async t => {
         await t.expect(false).ok('Should raise an error');
     }
     catch (e) {
-        await t.expect(e.errMsg).contains('Cannot find Angular in development mode.');
+        await t.expect(e.errMsg).contains('Cannot find information about Angular components. The tested application should be deployed in development mode.');
     }
 });

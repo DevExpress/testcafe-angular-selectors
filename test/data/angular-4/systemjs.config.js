@@ -3,7 +3,7 @@
 (function () {
     System.config({
         paths: {
-            'npm:': '/node_modules/'
+            'npm:': './node_modules/'
         },
         map: {
             app:                                 'app',

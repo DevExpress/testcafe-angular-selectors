@@ -1,0 +1,22 @@
+{
+  "name": "angular-4",
+  "version": "1.0.0",
+  "dependencies": {
+    "@angular/animations": "^4.0.3",
+    "@angular/common": "~4.0.0",
+    "@angular/compiler": "~4.0.0",
+    "@angular/compiler-cli": "~4.0.0",
+    "@angular/core": "~4.0.0",
+    "@angular/forms": "~4.0.0",
+    "@angular/platform-browser": "~4.0.0",
+    "@angular/platform-browser-dynamic": "~4.0.0",
+    "@angular/router": "~4.0.0",
+    "@angular/tsc-wrapped": "~4.0.0",
+    "@angular/upgrade": "~4.0.0",
+    "core-js": "^2.4.1",
+    "rxjs": "^5.4.3",
+    "systemjs": "0.19.39",
+    "typescript": "^2.5.2",
+    "zone.js": "^0.8.4"
+  }
+}
