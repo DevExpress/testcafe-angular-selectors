@@ -1,6 +1,6 @@
 {
   "name": "testcafe-angular-selectors",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Angular selectors for TestCafe",
   "author": {
     "name": "Developer Express Inc.",
@@ -21,7 +21,7 @@
     "install-angular-4-deps": "cd ./test/data/angular-4 && npm i",
     "install-angular-8-deps": "cd ./test/data/angular-8 && npm i",
     "install-angular-9-deps": "cd ./test/data/angular-9 && npm i",
-    "postinstall": "npm run install-angularjs-deps && npm run install-angular-4-deps && npm run install-angular-8-deps && npm run install-angular-9-deps",
+    "install-angular-deps": "npm run install-angularjs-deps && npm run install-angular-4-deps && npm run install-angular-8-deps && npm run install-angular-9-deps",
     "lint": "eslint src/*.js test/*.js",
     "http-server": "http-server ./ -s",
     "compile-angular-4-app": "cd test/data/angular-4 && tsc -p ./",
@@ -29,7 +29,7 @@
     "compile-angular-9-app": "cd test/data/angular-9 && npx ng build angular-app",
     "compile-angular-apps": "npm run compile-angular-4-app && npm run compile-angular-8-app && npm run compile-angular-9-app",
     "testcafe": "testcafe chrome,firefox,edge,ie test/*-test.js --app \"npm run http-server\"",
-    "test": "npm run lint && npm run build && npm run compile-angular-apps && npm run testcafe",
+    "test": "npm run install-angular-deps && npm run lint && npm run build && npm run compile-angular-apps && npm run testcafe",
     "build": "babel src --out-dir lib",
     "publish-please": "publish-please",
     "prepublish": "publish-please guard"
