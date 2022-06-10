@@ -1,10 +1,11 @@
 /*global Promise*/
 
-import { ClientFunction } from 'testcafe';
+const { ClientFunction } = require('testcafe');
 
-export default ClientFunction(ms => {
+module.exports = ClientFunction(ms => {
     return new Promise((resolve, reject) => {
         let pingIntervalId  = null;
+
         let pingTimeoutId   = null;
         const WAIT_TIMEOUT  = ms || 10000;
         const PING_INTERVAL = 100;

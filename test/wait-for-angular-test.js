@@ -1,4 +1,4 @@
-import { waitForAngular } from '../lib';
+import { waitForAngular } from '../src';
 
 fixture `Wait for Angular`;
 

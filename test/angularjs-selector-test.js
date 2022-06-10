@@ -1,4 +1,4 @@
-import { AngularJSSelector } from '../lib';
+import { AngularJSSelector } from '../src';
 import { Selector } from 'testcafe';
 
 fixture `AngularJSSelector`

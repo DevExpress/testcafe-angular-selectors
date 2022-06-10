@@ -1,6 +1,6 @@
-import { Selector } from 'testcafe';
+const { Selector } = require('testcafe');
 
-export default Selector(complexSelector => {
+module.exports = Selector(complexSelector => {
     function validateSelector (selector) {
         if (selector !== void 0 && typeof selector !== 'string')
             throw new Error(`If the selector parameter is passed it should be a string, but it was ${typeof selector}`);
@@ -33,6 +33,8 @@ export default Selector(complexSelector => {
     }
 
     function filterNodes (rootElement, tags) {
+        const foundNodes = [];
+
         function walkElements (element, tagIndex, checkFn) {
             if (checkFn(element, tagIndex)) {
                 if (tagIndex === tags.length - 1) {
@@ -66,8 +68,6 @@ export default Selector(complexSelector => {
 
             return tags[tagIndex] === getNativeElementTag(nativeElement);
         }
-
-        const foundNodes = [];
 
         if (walkingNativeElementsMode)
             walkElements(rootElement, 0, checkNativeElement);

@@ -1,4 +1,4 @@
-import { AngularSelector } from '../lib';
+import { AngularSelector } from '../src';
 
 fixture `Angular selector errors`;
 

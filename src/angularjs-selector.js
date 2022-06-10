@@ -1,6 +1,4 @@
-/*global window*/
-
-import { Selector, ClientFunction } from 'testcafe';
+const { Selector, ClientFunction } = require('testcafe');
 
 class AngularJSSelector {
     constructor () {
@@ -137,4 +135,4 @@ class AngularJSSelector {
     }
 }
 
-export default new AngularJSSelector();
+module.exports = new AngularJSSelector();
