@@ -1,5 +1,5 @@
-import AngularJSSelector from './angularjs-selector';
-import AngularSelector from './angular-selector';
-import waitForAngular from './wait-for-angular';
+const AngularJSSelector = require('./angularjs-selector');
+const AngularSelector   = require('./angular-selector');
+const waitForAngular    = require('./wait-for-angular');
 
-export { AngularJSSelector, AngularSelector, waitForAngular };
+module.exports = { AngularJSSelector, AngularSelector, waitForAngular };

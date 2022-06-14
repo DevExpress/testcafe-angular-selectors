@@ -1,4 +1,4 @@
-import { AngularSelector, waitForAngular } from '../lib';
+import { AngularSelector, waitForAngular } from '../src';
 
 runTests('AngularSelector (Angular v4)', 'http://localhost:8080/test/data/angular-4');
 runTests('AngularSelector (Angular v8)', 'http://localhost:8080/test/data/angular-8/dist/index-aot.html');
@@ -19,6 +19,7 @@ function runTests (fixtureLabel, pageUrl) {
             .expect(root.exists).ok()
             .expect(rootAngular.rootProp1).eql(1);
 
+        //eslint-disable-next-line
         await t.expect(rootAngular.hasOwnProperty('__ngContext__')).notOk();
     });
 
