@@ -23,7 +23,7 @@
     "http-server": "http-server ./ -s",
     "compile-angular-15-app": "cd test/data/angular-15  && npx ng build angular-app",
     "compile-angular-apps": "npm run compile-angular-15-app",
-    "testcafe": "testcafe chrome,firefox,edge test/*-test.js --debug-on-fail --app \"npm run http-server\"",
+    "testcafe": "testcafe chrome,firefox,edge test/*-test.js --app \"npm run http-server\"",
     "test": "npm run install-angular-deps && npm run lint && npm run compile-angular-apps && npm run testcafe",
     "publish-please": "publish-please",
     "prepublish": "publish-please guard"
