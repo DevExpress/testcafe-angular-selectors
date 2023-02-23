@@ -17,18 +17,13 @@
   ],
   "license": "MIT",
   "scripts": {
-    "install-angularjs-deps": "cd ./test/data/angularjs && npm i --force",
-    "install-angular-4-deps": "cd ./test/data/angular-4 && npm i --force",
-    "install-angular-8-deps": "cd ./test/data/angular-8 && npm i --force",
-    "install-angular-9-deps": "cd ./test/data/angular-9 && npm i --force",
-    "install-angular-deps": "npm run install-angularjs-deps && npm run install-angular-4-deps && npm run install-angular-8-deps && npm run install-angular-9-deps",
+    "install-angular-15-deps": "cd ./test/data/angular-15 && npm i --force",
+    "install-angular-deps": "npm run install-angular-15-deps",
     "lint": "eslint src/*.js test/*.js",
     "http-server": "http-server ./ -s",
-    "compile-angular-4-app": "cd test/data/angular-4 && tsc -p ./",
-    "compile-angular-8-app": "cd test/data/angular-8 && npx ng build angular-app",
-    "compile-angular-9-app": "cd test/data/angular-9 && npx ng build angular-app",
-    "compile-angular-apps": "npm run compile-angular-4-app && npm run compile-angular-8-app && npm run compile-angular-9-app",
-    "testcafe": "testcafe chrome,firefox,edge,ie test/*-test.js  --app \"npm run http-server\"",
+    "compile-angular-15-app": "cd test/data/angular-15  && npx ng build angular-app",
+    "compile-angular-apps": "npm run compile-angular-15-app",
+    "testcafe": "testcafe chrome,firefox,edge test/*-test.js --app \"npm run http-server\"",
     "test": "npm run install-angular-deps && npm run lint && npm run compile-angular-apps && npm run testcafe",
     "publish-please": "publish-please",
     "prepublish": "publish-please guard"
@@ -39,12 +34,11 @@
     "eslint-plugin-testcafe": "^0.2.1",
     "http-server": "^14.1.1",
     "publish-please": "^5.5.2",
-    "testcafe": "^1.8.3"
+    "testcafe": "^2.3.1"
   },
   "keywords": [
     "testcafe",
     "angular",
-    "angularjs",
     "selectors",
     "plugin"
   ],
