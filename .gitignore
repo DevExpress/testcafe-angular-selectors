@@ -54,4 +54,5 @@ test/data/angular-15/package-lock.json
 lib/*
 test/data/lib/*
 test/data/angular-15/dist/*
+test/data/angular-15/.angular/*
 node_modules
