@@ -1,6 +1,9 @@
 environment:
   NODEJS_VERSION: "stable"
 
+image:
+  - Visual Studio 2022
+
 install:
 - ps: >-
     Install-Product node $env:NODEJS_VERSION
