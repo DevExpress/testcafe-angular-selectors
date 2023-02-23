@@ -1,8 +1,6 @@
 import { AngularSelector, waitForAngular } from '../src';
 
-runTests('AngularSelector (Angular v4)', 'http://localhost:8080/test/data/angular-4');
-runTests('AngularSelector (Angular v8)', 'http://localhost:8080/test/data/angular-8/dist/index-aot.html');
-runTests('AngularSelector (Angular v9)', 'http://localhost:8080/test/data/angular-9/dist/index-aot.html');
+runTests('AngularSelector (Angular v15)', 'http://localhost:8080/test/data/angular-15/dist/index-aot.html');
 
 function runTests (fixtureLabel, pageUrl) {
     fixture(fixtureLabel)

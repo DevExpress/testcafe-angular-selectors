@@ -1,8 +1,0 @@
-{
-  "name": "angularjs",
-  "version": "1.0.0",
-  "dependencies": {
-    "angular": "^1.6.4",
-    "angular-in-memory-web-api": "~0.3.1"
-  }
-}
