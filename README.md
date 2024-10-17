@@ -1,4 +1,4 @@
-# DEPREDCATED
+# DEPRECATED
 The TestCafe team no longer maintains the `testcafe-angular-selectors` repository. If you want to take over the project, we'll be happy to hand it over. To contact the team, create a new GitHub issue.
 
 ## testcafe-angular-selectors
